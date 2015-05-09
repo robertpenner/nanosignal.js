@@ -1,0 +1,26 @@
+{
+  "name": "nanosignal",
+  "version": "0.0.1",
+  "description": "Tiny multi-cast tool for callbacks/events. Type-safe when used in TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertpenner/nanosignal.js"
+  },
+  "keywords": [
+    "signals",
+    "events",
+    "TypeScript",
+    "JavaScript"
+  ],
+  "author": "Robert Penner <robert@robertpenner.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "gulp": "^3.8.11",
+    "mocha": "^2.2.4"
+  }
+}

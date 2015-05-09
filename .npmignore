@@ -1,0 +1,6 @@
+src
+spec
+karma*.js
+*.map
+.idea
+typings
