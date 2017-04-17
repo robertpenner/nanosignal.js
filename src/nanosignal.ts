@@ -14,15 +14,16 @@ export interface Signal<F extends Function> extends Function {
 
 /**
  * Creates a Signal: a function that multicasts its arguments to listeners.
- * @returns The new Signal.
+ * @returns A new Signal
  */
 export default function createSignal<F extends Function>(): F & Signal<F> {
   let listeners: ReadonlyArray<F> = [];
 
   const signal: F & Signal<F> = Object.assign(
     function () {
-      for (let i = 0; i < listeners.length; i++) {
-        listeners[i].apply(null, arguments);
+      const fns = listeners;
+      for (let i = 0; i < fns.length; i++) {
+        fns[i].apply(null, arguments);
       }
     },
     {
