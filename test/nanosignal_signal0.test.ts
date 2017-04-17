@@ -72,8 +72,8 @@ describe('signal with 0 arguments', () => {
         happened();
       });
       it('calls the listeners twice', () => {
-        expect(listenerA.mock.calls.length).toEqual(2);
-        expect(listenerB.mock.calls.length).toEqual(2);
+        expect(listenerA).toHaveBeenCalledTimes(2);
+        expect(listenerB).toHaveBeenCalledTimes(2);
       });
     });
 

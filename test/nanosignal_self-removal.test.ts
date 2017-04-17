@@ -19,12 +19,12 @@ describe('when a listener removes itself during dispatch', () => {
   });
 
   it('the self-remover is called once then removed', () => {
-    expect(selfRemover.mock.calls.length).toEqual(1);
+    expect(selfRemover).toHaveBeenCalledTimes(1);
   });
 
   it('no other listener is skipped', () => {
-    expect(listenerB.mock.calls.length).toEqual(2);
-    expect(listenerC.mock.calls.length).toEqual(2);
+    expect(listenerB).toHaveBeenCalledTimes(2);
+    expect(listenerC).toHaveBeenCalledTimes(2);
   });
 });
 
