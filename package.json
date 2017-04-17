@@ -78,6 +78,7 @@
   "devDependencies": {
     "@types/jest": "^18.1.1",
     "@types/node": "^7.0.2",
+    "@types/sinon": "^2.1.2",
     "@types/webpack": "^2.2.7",
     "awesome-typescript-loader": "^3.1.0",
     "babel-core": "^6.22.1",
@@ -95,6 +96,7 @@
     "replace-in-file": "^2.3.2",
     "rimraf": "^2.5.4",
     "semantic-release": "^6.3.2",
+    "sinon": "^2.1.0",
     "ts-jest": "^19.0.0",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",

@@ -21,5 +21,6 @@
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": true
-  }
+  },
+  "out": "tsDist"
 }
