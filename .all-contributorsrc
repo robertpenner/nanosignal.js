@@ -1,0 +1,69 @@
+{
+  "projectName": "typescript-library-starter",
+  "projectOwner": "alexjoverm",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "k1r0s",
+      "name": "Ciro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6052309?v=3",
+      "profile": "https://www.linkedin.com/in/ciro-ivan-agulló-guarinos-42109376",
+      "contributions": [
+        "code",
+        "tool"
+      ]
+    },
+    {
+      "login": "mariusschulz",
+      "name": "Marius Schulz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/947523?v=3",
+      "profile": "https://blog.mariusschulz.com",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "alextrastero",
+      "name": "Alexander Odell",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4152819?v=3",
+      "profile": "https://github.com/alextrastero",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "superamadeus",
+      "name": "Ryan Ham",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/8728882?v=3",
+      "profile": "https://github.com/superamadeus",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ChinW",
+      "name": "Chi",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/8458838?v=3",
+      "profile": "https://consiiii.me",
+      "contributions": [
+        "code",
+        "tool",
+        "doc"
+      ]
+    },
+    {
+      "login": "mattmazzola",
+      "name": "Matt Mazzola",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2856501?v=3",
+      "profile": "https://github.com/mattmazzola",
+      "contributions": [
+        "code",
+        "tool"
+      ]
+    }
+  ]
+}
