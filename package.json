@@ -4,14 +4,14 @@
   "description": "",
   "keywords": [],
   "main": "dist/nanosignal.js",
-  "typings": "dist/src/nanosignal.d.ts",
+  "typings": "dist/typings/src/nanosignal.d.ts",
   "files": [
     "dist"
   ],
   "author": "Robert Penner <robert@robertpenner.com>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/robertpenner/nanosignal.js"
   },
   "license": "MIT",
   "engines": {
