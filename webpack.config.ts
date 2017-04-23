@@ -3,7 +3,6 @@ const { camelCase } = require('lodash');
 const webpack = require('webpack');
 const { TsConfigPathsPlugin, CheckerPlugin } = require('awesome-typescript-loader');
 const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const env = process && process.env && process.env.NODE_ENV;
 const serverPort = process.env.npm_package_config_devPort || 8081;
 const dev = !(env && env === 'production');
@@ -15,14 +14,6 @@ const libraryName = 'nanosignal';
 const plugins = [
   new CheckerPlugin(),
   new TsConfigPathsPlugin(),
-  new HtmlWebpackPlugin({
-    inject: true,
-    title: libraryName,
-    filename: 'index.html',
-    template: join(__dirname, 'template/index.html'),
-    hash: true,
-    chunks: ['common', 'index']
-  })
 ];
 
 let entry: string | string[] = [
