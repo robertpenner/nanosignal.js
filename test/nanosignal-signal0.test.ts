@@ -1,9 +1,7 @@
 import createSignal, { Signal } from '../src/nanosignal';
 
-type Fn0 = () => void;
-
 describe('signal with 0 arguments', () => {
-  let happened: Signal<Fn0>;
+  let happened: Signal;
   beforeEach(() => {
     happened = createSignal();
   });

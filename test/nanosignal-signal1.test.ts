@@ -1,7 +1,7 @@
 import createSignal, { Signal } from '../src/nanosignal';
 
 describe('signal with 1 argument', () => {
-  let dated: Signal<(date: Date) => void>;
+  let dated: Signal<Date>;
   beforeEach(() => {
     dated = createSignal();
   });
