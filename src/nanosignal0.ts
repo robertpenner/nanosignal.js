@@ -5,8 +5,8 @@ export interface Listener0<RESULT = void> {
 /**
  * Cancels a listener's subscription to its signal.
  */
-export interface Unsubscriber {
-  (): void;
+export interface Subscription {
+  unsubscribe(): void;
 }
 
 export interface Signal0<RESULT = void> {
@@ -16,9 +16,13 @@ export interface Signal0<RESULT = void> {
    * Starts a function listening to this signal.
    * @param listener
    */
-  subscribe(listener: Listener0<RESULT>): Unsubscriber;
+  subscribe(listener: Listener0<RESULT>): Subscription;
 }
 
+/**
+ * Creates a Signal0: a function that calls listeners but passes no arguments.
+ * @returns A new Signal0
+ */
 export default function createSignal0<RESULT = void>(firstListener?: Listener0<RESULT>): Signal0<RESULT> {
   let listeners: ReadonlyArray<Listener0<RESULT>> = firstListener ? [firstListener] : [];
 
@@ -26,9 +30,10 @@ export default function createSignal0<RESULT = void>(firstListener?: Listener0<R
 
   signal.subscribe = (listener) => {
     listeners = listeners.concat(listener);
-    // Create an unsubsc`
-    return () => {
-      listeners = listeners.filter(fn => fn !== listener);
+    return {
+      unsubscribe() {
+        listeners = listeners.filter(fn => fn !== listener);
+      }
     };
   };
 
