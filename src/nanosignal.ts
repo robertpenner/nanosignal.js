@@ -1,4 +1,4 @@
-export interface Listener<PAYLOAD = undefined, RESULT = void> {
+export interface Listener<PAYLOAD, RESULT = void> {
   (payload: PAYLOAD): RESULT;
 }
 
@@ -22,7 +22,7 @@ export interface Signal<PAYLOAD, RESULT = void> {
  * Creates a Signal: a function that multicasts its arguments to listeners.
  * @returns A new Signal
  */
-export default function createSignal<PAYLOAD = undefined, RESULT = void>(firstListener?: Listener<PAYLOAD, RESULT>): Signal<PAYLOAD, RESULT> {
+export default function createSignal<PAYLOAD, RESULT = void>(firstListener?: Listener<PAYLOAD, RESULT>): Signal<PAYLOAD, RESULT> {
   let listeners: ReadonlyArray<Listener<PAYLOAD, RESULT>> = firstListener ? [firstListener] : [];
 
   const signal: Partial<Signal<PAYLOAD, RESULT>> = (payload: PAYLOAD) => listeners.map(fn => fn(payload));
@@ -35,4 +35,5 @@ export default function createSignal<PAYLOAD = undefined, RESULT = void>(firstLi
 
   return signal as Signal<PAYLOAD, RESULT>;
 }
+
 

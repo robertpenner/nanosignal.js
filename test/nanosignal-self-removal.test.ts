@@ -1,12 +1,12 @@
-import createSignal, { Signal } from '../src/nanosignal';
+import { createSignal0, Signal0 } from '../src/nanosignal0';
 
 describe('when a listener removes itself during dispatch', () => {
-  let happened: Signal<() => void>;
+  let happened: Signal0;
   let selfRemover: jest.Mock<any>;
   let listenerB: jest.Mock<any>;
   let listenerC: jest.Mock<any>;
   beforeEach(() => {
-    happened = createSignal();
+    happened = createSignal0();
     selfRemover = jest.fn(() => happened.remove(selfRemover));
     listenerB = jest.fn();
     listenerC = jest.fn();

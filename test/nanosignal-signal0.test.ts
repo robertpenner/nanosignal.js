@@ -1,9 +1,9 @@
-import createSignal, { Signal } from '../src/nanosignal';
+import { createSignal0, Signal0 } from '../src/nanosignal0';
 
 describe('signal with 0 arguments', () => {
-  let happened: Signal;
+  let happened: Signal0;
   beforeEach(() => {
-    happened = createSignal();
+    happened = createSignal0();
   });
   it('is a function', () => expect(typeof happened).toBe('function'));
 
