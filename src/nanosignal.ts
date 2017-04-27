@@ -1,9 +1,9 @@
 export interface Listener<PAYLOAD = undefined, RESULT = void> {
-  (payload?: PAYLOAD): RESULT;
+  (payload: PAYLOAD): RESULT;
 }
 
-export interface Signal<PAYLOAD = undefined, RESULT = void> {
-  (payload?: PAYLOAD): ReadonlyArray<RESULT>;
+export interface Signal<PAYLOAD, RESULT = void> {
+  (payload: PAYLOAD): ReadonlyArray<RESULT>;
 
   /**
    * Starts a function listening to this signal.
@@ -25,17 +25,14 @@ export interface Signal<PAYLOAD = undefined, RESULT = void> {
 export default function createSignal<PAYLOAD = undefined, RESULT = void>(firstListener?: Listener<PAYLOAD, RESULT>): Signal<PAYLOAD, RESULT> {
   let listeners: ReadonlyArray<Listener<PAYLOAD, RESULT>> = firstListener ? [firstListener] : [];
 
-  const signal: Signal<PAYLOAD, RESULT> = Object.assign(
-    (payload?: PAYLOAD) => listeners.map(listener => listener(payload)),
-    {
-      add(listener: Listener<PAYLOAD, RESULT>) {
-        listeners = listeners.concat(listener);
-      },
-      remove(listener: Listener<PAYLOAD, RESULT>) {
-        listeners = listeners.filter(fn => fn !== listener);
-      },
-    }
+  const signal: Partial<Signal<PAYLOAD, RESULT>> = (payload: PAYLOAD) => listeners.map(fn => fn(payload));
+  signal.add = (listener) => (
+    listeners = listeners.concat(listener)
   );
-  return signal;
+  signal.remove = (listener) => {
+    listeners = listeners.filter(fn => fn !== listener);
+  };
+
+  return signal as Signal<PAYLOAD, RESULT>;
 }
 
