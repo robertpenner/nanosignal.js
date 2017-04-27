@@ -50,7 +50,7 @@ export default {
     path: join(__dirname, 'dist'),
     libraryTarget: 'umd',
     library: camelCase(libraryName),
-    filename: `${libraryName}.js`
+    filename: `${libraryName}.min.js`
   },
   resolve: {
     extensions: ['.ts', '.js']

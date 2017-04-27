@@ -1,25 +1,25 @@
-import { createSignal0, Signal0 } from '../src/nanosignal0';
+import createSignal0, { Signal0 } from '../src/nanosignal0';
 
-describe('when a listener removes itself during dispatch', () => {
+describe('when a listener unsubscribes another listener during dispatch', () => {
   let happened: Signal0;
-  let selfRemover: jest.Mock<any>;
+  let listenerA: jest.Mock<any>;
   let listenerB: jest.Mock<any>;
   let listenerC: jest.Mock<any>;
   beforeEach(() => {
     happened = createSignal0();
-    selfRemover = jest.fn(() => happened.remove(selfRemover));
-    listenerB = jest.fn();
+    listenerA = jest.fn();
+    const unsubscribeA = happened.subscribe(listenerA);
+    listenerB = jest.fn(unsubscribeA);
     listenerC = jest.fn();
-    happened.add(selfRemover);
-    happened.add(listenerB);
-    happened.add(listenerC);
-    // dispatch twice and expect self-remover to be called only once
+    happened.subscribe(listenerB);
+    happened.subscribe(listenerC);
+    // dispatch twice and expect self-unsubscriber to be called only once
     happened();
     happened();
   });
 
-  it('the self-remover is called once then removed', () => {
-    expect(selfRemover).toHaveBeenCalledTimes(1);
+  it('the first listener is called once then unsubscribed', () => {
+    expect(listenerA).toHaveBeenCalledTimes(1);
   });
 
   it('no other listener is skipped', () => {

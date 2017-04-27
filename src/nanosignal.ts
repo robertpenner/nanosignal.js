@@ -2,6 +2,13 @@ export interface Listener<PAYLOAD, RESULT = void> {
   (payload: PAYLOAD): RESULT;
 }
 
+/**
+ * Cancels a listener's subscription to its signal.
+ */
+export interface Unsubscriber {
+  (): void;
+}
+
 export interface Signal<PAYLOAD, RESULT = void> {
   (payload: PAYLOAD): ReadonlyArray<RESULT>;
 
@@ -9,13 +16,7 @@ export interface Signal<PAYLOAD, RESULT = void> {
    * Starts a function listening to this signal.
    * @param listener
    */
-  add(listener: Listener<PAYLOAD, RESULT>): void;
-
-  /**
-   * Stops a function from listening to this signal.
-   * @param listener
-   */
-  remove(listener: Listener<PAYLOAD, RESULT>): void;
+  subscribe(listener: Listener<PAYLOAD, RESULT>): Unsubscriber;
 }
 
 /**
@@ -26,11 +27,12 @@ export default function createSignal<PAYLOAD, RESULT = void>(firstListener?: Lis
   let listeners: ReadonlyArray<Listener<PAYLOAD, RESULT>> = firstListener ? [firstListener] : [];
 
   const signal: Partial<Signal<PAYLOAD, RESULT>> = (payload: PAYLOAD) => listeners.map(fn => fn(payload));
-  signal.add = (listener) => (
-    listeners = listeners.concat(listener)
-  );
-  signal.remove = (listener) => {
-    listeners = listeners.filter(fn => fn !== listener);
+
+  signal.subscribe = (listener) => {
+    listeners = listeners.concat(listener);
+    return () => {
+      listeners = listeners.filter(fn => fn !== listener);
+    };
   };
 
   return signal as Signal<PAYLOAD, RESULT>;

@@ -14,8 +14,8 @@ describe('signal with 1 argument', () => {
     beforeEach(() => {
       listenerA = jest.fn();
       listenerB = jest.fn();
-      dated.add(listenerA);
-      dated.add(listenerB);
+      dated.subscribe(listenerA);
+      dated.subscribe(listenerB);
       dated(payload);
     });
 
