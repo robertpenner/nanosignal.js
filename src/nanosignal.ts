@@ -5,8 +5,8 @@ export interface Listener<PAYLOAD, RESULT = void> {
 /**
  * Cancels a listener's subscription to its signal.
  */
-export interface Subscription {
-  unsubscribe(): void;
+export interface Unsubscriber {
+  (): void;
 }
 
 export interface Signal<PAYLOAD, RESULT = void> {
@@ -16,7 +16,7 @@ export interface Signal<PAYLOAD, RESULT = void> {
    * Starts a function listening to this signal.
    * @param listener
    */
-  subscribe(listener: Listener<PAYLOAD, RESULT>): Subscription;
+  subscribe(listener: Listener<PAYLOAD, RESULT>): Unsubscriber;
 }
 
 /**
@@ -30,10 +30,8 @@ export default function createSignal<PAYLOAD, RESULT = void>(firstListener?: Lis
 
   signal.subscribe = (listener) => {
     listeners = listeners.concat(listener);
-    return {
-      unsubscribe() {
-        listeners = listeners.filter(fn => fn !== listener);
-      }
+    return () => {
+      listeners = listeners.filter(fn => fn !== listener);
     };
   };
 

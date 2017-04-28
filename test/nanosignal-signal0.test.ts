@@ -1,4 +1,4 @@
-import createSignal0, { Signal0, Subscription } from '../src/nanosignal0';
+import createSignal0, { Signal0, Unsubscriber } from '../src/nanosignal0';
 
 describe('signal with 0 arguments', () => {
   let happened: Signal0;
@@ -9,11 +9,11 @@ describe('signal with 0 arguments', () => {
 
   describe('when removing a listener before firing', () => {
     let listenerA: jest.Mock<any>;
-    let subscriptionA: Subscription;
+    let removeA: Unsubscriber;
     beforeEach(() => {
       listenerA = jest.fn();
-      subscriptionA = happened.subscribe(listenerA);
-      subscriptionA.unsubscribe();
+      removeA = happened.subscribe(listenerA);
+      removeA();
       happened();
     });
 
@@ -24,10 +24,10 @@ describe('signal with 0 arguments', () => {
 
   describe('when adding the same listener twice', () => {
     let listenerA: jest.Mock<any>;
-    let subscriptionA: Subscription;
+    let removeA: () => void;
     beforeEach(() => {
       listenerA = jest.fn();
-      subscriptionA = happened.subscribe(listenerA);
+      removeA = happened.subscribe(listenerA);
       happened.subscribe(listenerA);
     });
 
@@ -42,7 +42,7 @@ describe('signal with 0 arguments', () => {
 
     describe('then removing the listener once and firing', () => {
       beforeEach(() => {
-        subscriptionA.unsubscribe();
+        removeA();
         happened();
       });
       it('the listener is not called', () => {

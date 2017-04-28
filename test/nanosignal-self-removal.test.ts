@@ -8,8 +8,8 @@ describe('when a listener unsubscribes another listener during dispatch', () => 
   beforeEach(() => {
     happened = createSignal0();
     listenerA = jest.fn();
-    const subscriptionA = happened.subscribe(listenerA);
-    listenerB = jest.fn(subscriptionA.unsubscribe);
+    const unsubscribeA = happened.subscribe(listenerA);
+    listenerB = jest.fn(unsubscribeA);
     listenerC = jest.fn();
     happened.subscribe(listenerB);
     happened.subscribe(listenerC);
