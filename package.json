@@ -9,10 +9,7 @@
     "dist"
   ],
   "author": "Robert Penner <robert@robertpenner.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/robertpenner/nanosignal.js"
-  },
+  "repository": "https://github.com/robertpenner/nanosignal.js",
   "license": "MIT",
   "engines": {
     "node": ">=6.0.0"
