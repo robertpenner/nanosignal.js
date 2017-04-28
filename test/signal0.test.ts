@@ -1,6 +1,6 @@
 import createSignal0, { Signal0, Unsubscriber } from '../src/nanosignal0';
 
-describe('signal with 0 arguments', () => {
+describe('Signal0', () => {
   let happened: Signal0;
   beforeEach(() => {
     happened = createSignal0();
@@ -99,7 +99,21 @@ describe('signal with 0 arguments', () => {
 
   });
 
+  describe('given a firstListener argument and then subscribe() a second listener', () => {
+    let listenerA: jest.Mock<any>;
+    let listenerB: jest.Mock<any>;
+    beforeEach(() => {
+      listenerA = jest.fn();
+      listenerB = jest.fn();
+      happened = createSignal0(listenerA);
+      happened.subscribe(listenerB);
+      happened();
+    });
+
+    it('when the signal fires, the listeners are called', () => {
+      expect(listenerA).toHaveBeenCalledTimes(1);
+      expect(listenerB).toHaveBeenCalledTimes(1);
+    });
+  });
+
 });
-
-
-
