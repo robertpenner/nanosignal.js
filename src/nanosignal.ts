@@ -30,15 +30,17 @@ export default function createSignal<PAYLOAD, RESULT = void>(
     ? [firstListener]
     : [];
 
-  const signal: Partial<Signal<PAYLOAD, RESULT>> = (payload: PAYLOAD) =>
-    listeners.map((fn) => fn(payload));
+  const signal = Object.assign(
+    (payload: PAYLOAD) => listeners.map((fn) => fn(payload)),
+    {
+      subscribe: (listener: Listener<PAYLOAD, RESULT>) => {
+        listeners = listeners.concat(listener);
+        return () => {
+          listeners = listeners.filter((fn) => fn !== listener);
+        };
+      },
+    },
+  );
 
-  signal.subscribe = (listener) => {
-    listeners = listeners.concat(listener);
-    return () => {
-      listeners = listeners.filter((fn) => fn !== listener);
-    };
-  };
-
-  return signal as Signal<PAYLOAD, RESULT>;
+  return signal;
 }
