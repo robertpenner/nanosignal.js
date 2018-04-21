@@ -35,7 +35,7 @@
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
-      "prettier --write --no-semi --single-quote",
+      "prettier --write",
       "git add"
     ]
   },
@@ -104,5 +104,12 @@
     "typedoc": "^0.11.0",
     "typescript": "^2.6.2",
     "validate-commit-msg": "^2.12.2"
+  },
+  "prettier": {
+    "parser": "typescript",
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always"
   }
 }
